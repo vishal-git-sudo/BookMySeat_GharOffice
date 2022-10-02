@@ -28,7 +28,7 @@ public class SeatTypeServlet extends HttpServlet {
 		type.setTitle(title);
 		int k = new UpdateAvailabilityDAO().update(type);
 		if(k>0) {
-			System.out.println("Availability status updated in the database");
+			System.out.println("Availability status updated in the database!");
 		}
 		ArrayList<GetSeatsBean> seats = new GetSeatsDAO().getSeats(type);
 		
