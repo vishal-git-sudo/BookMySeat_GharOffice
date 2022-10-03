@@ -9,8 +9,10 @@ public class HomeServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException {
 		res.setContentType("text/html");
 		String title = req.getParameter("title");
+		
 		HttpSession hs = req.getSession();
-		hs.setAttribute("title",title.toLowerCase());
+		hs.setAttribute("title",title);
+		new CreateTableDAO().create(title);
 		RequestDispatcher rd = req.getRequestDispatcher("userName.html");
 		rd.include(req, res);
 	}

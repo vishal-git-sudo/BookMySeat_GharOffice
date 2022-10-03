@@ -4,20 +4,67 @@
 <meta charset="UTF-8">
 <title>Movies</title>
 <style type="text/css">
-	h1{
-		background:black;
-		color:red;
-		font:bold;
+	body {
+		color:rgb(255, 0, 0);
+		background:rgb(242, 242, 242);
+		background-repeat: no-repeat, repeat;
+		background-position: center; 
+		background-size: cover;
+		
+		
+		font-family: cursive;
+		font-weight: bold;
+		font-size: 14px;
+		 margin: 0;
+		text-align:center;
 	}
-	
+	div{
+		text-align:center;
+	}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.topnav a:hover {
+  background-color: #FB6464;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #F68888;
+  color: white;
+}
+.images img:hover{
+filter: grayscale(0%);
+filter: gray;
+-webkit-filter: grayscale(0%);
+filter: none;
+transition: 1s ease;
+}
+
 </style>
 </head>
 <body>
-	<h1>BookMySeat</h1>
-	<h2>Recommended Movies</h2>
-	<div>
+	<div class="topnav">
+  		<a class="active" href="home.html"><b>Book My Seat</b></a>
+	</div>
+	<div style="padding-left:16px">
+  		<h2>Recommended Movies</h2>
+ 	</div>
+ 	<div class="images">
 		<a href="bladeRunner.html"><img src="images/BladeRunner.jpg" alt="BladeRunner" height="250" width="250"></a>
-		<a href="gardiansOfGalaxy.html"><img src="images/GardiansOfGalaxy.jpg" alt="Gardians Of Galaxy" height="250" width="250"></a>
+		<a href="guardiansOfGalaxy.html"><img src="images/GardiansOfGalaxy.jpg" alt="Gardians Of Galaxy" height="250" width="250"></a>
 		<a href="inception.html"><img src="images/Inception.jpg" alt="Inception" height="250" width="250"></a>
 		<a href="ironMan.html"><img src="images/IronMan.jpg" alt="Iron Man" height="250" width="250"></a>
 		<a href="littleWomen.html"><img src="images/LittleWomen.jpg" alt="Little Women" height="250" width="250"></a>

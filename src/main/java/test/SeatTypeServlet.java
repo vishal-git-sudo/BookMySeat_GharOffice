@@ -28,48 +28,113 @@ public class SeatTypeServlet extends HttpServlet {
 		type.setTitle(title);
 		int k = new UpdateAvailabilityDAO().update(type);
 		if(k>0) {
-			System.out.println("Availability status updated in the database!");
-		}
-		ArrayList<GetSeatsBean> seats = new GetSeatsDAO().getSeats(type);
-		
-		if(seats==null) {
-			pw.println("Seats could not be returned from the database<br>");
-		}
-		else {
-			pw.println("");
-			pw.println();
-			pw.println("<div style='text-align:center'><h3> Select The Seats </h3></div>");
-			pw.println("<div style='text-align:center;border: 2px solid red;border-radius: 5px'>");
-			pw.println("<form action = 'BookingConfirmation' method='post'>");
-			int i=0;
-			pw.println("<div><h5>Standard</h5></div>");
-			while(i<seats.size()) {
-				GetSeatsBean gsb = seats.get(i);
-				pw.println(gsb.getSeatNumber());
-				if(gsb.getBooked().trim().equals("f")) {
-					if(gsb.getAvailability().trim().equals("t")) {
-						pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats' height='40px' width='40px'>");
+			ArrayList<GetSeatsBean> seats = new GetSeatsDAO().getSeats(type);
+			if(seats==null) {
+				RequestDispatcher rd = req.getRequestDispatcher("error.html");
+				rd.include(req, res);
+			}
+			else {
+				/*pw.println("<!DOCTYPE html><html><head>function checkBoxLimit() {"+
+						"var checkBoxGroup = document.forms['form_name']['seats[]'];"+		
+						"var limit = 2;"+
+						"for (var i = 0; i < checkBoxGroup.length; i++) {"+
+							"checkBoxGroup[i].onclick = function() {"+
+								"var checkedcount = 0;"+
+								"for (var i = 0; i < checkBoxGroup.length; i++) {"+
+									"checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;"+
+								"}"+
+								"if (checkedcount > limit) {"+
+									"console.log('You can select maximum of ' + limit + ' checkboxes.');"+
+									"alert('You can select maximum of ' + limit + ' checkboxes.');"+			
+									"this.checked = false;"+
+								"}"+
+							"}"+
+						"}"+
+					"}"+"*/
+				pw.println("<head><style>body {"
+						+ "		background:rgb(242, 242, 242);"
+						+ "		background-repeat: no-repeat, repeat;"
+						+ "		background-position: center; "
+						+ "		background-size: cover;"
+						+ "		"
+						+ "		color:#665E5E ;"
+						+ "		font-family: cursive;"
+						+ "		font-weight: bold;"
+						+ "		font-size: 14px;"
+						+ "		 margin: 0;"
+						+ "		text-align:center;"
+						+ "} "
+						+ ".topnav {"
+						+ "  overflow: hidden;"
+						+ "  background-color: #333;"
+						+ "  "
+						+ "}"
+						+ ""
+						+ ".topnav a {"
+						+ "  float: left;"
+						+ "  color: #f2f2f2;"
+						+ "  text-align: center;"
+						+ "  padding: 14px 16px;"
+						+ "  text-decoration: none;"
+						+ "  font-size: 22px;"
+						+ "}"
+						+ ""
+						+ ".topnav a:hover {"
+						+ "  background-color: #FB6464;"
+						+ "  color: black;"
+						+ "}"
+						+ ""
+						+ ".topnav a.active {"
+						+ "  background-color: #F68888;"
+						+ "  color: white;"
+						+ "}"
+						+ ".topnav-right {"
+						+ "  float: right;"
+						+ "}</style></head>");
+				pw.println("<body><div class=\"topnav\">"
+						+ "  		<a class=\"active\" href=\"home.html\"><b>Book My Seat</b></a>"
+						+ "  		<div class=\"topnav-right\">"
+						+ "   			<a class='back' href='home.html'>Back</a>"
+						+ " 		</div>"
+						+ "	</div>");
+				pw.println("<h2 style='text-align:center'> Select The Seats </h2>");
+				//pw.println("<div style='text-align:center;border: 2px solid red;border-radius: 5px;box-shadow: 0 0 15px rgba(0,0,0,0.75);'>");
+				pw.println("<form action = 'BookingConfirmation' method='post' name='form_name' id='form_name'>");
+				int i=0;
+				pw.println("<div><h3>Standard</h3></div>");
+				while(i<seats.size()) {
+					GetSeatsBean gsb = seats.get(i);
+					pw.println(gsb.getSeatNumber());
+					if(gsb.getBooked().trim().equals("f")) {
+						if(gsb.getAvailability().trim().equals("t")) {
+							pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats[]' >&nbsp;&nbsp;");
+						}
+						else {
+							pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats[]' disabled>&nbsp;&nbsp;");
+						}
 					}
 					else {
-						pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats' height='40px' width='40px' disabled>");
+						pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats[]' disabled>&nbsp;&nbsp;");
 					}
+					if((i+1)%10==0) {
+						pw.println("<br>");
+					}
+					if((i+1)%70==0) {
+						pw.println("<div><h3>Premium</h3></div>");
+					}
+					i++;
 				}
-				else {
-					pw.println("<input type='checkbox' value="+(i+1)+""+" name='seats' height='40px' width='40px' disabled>");
-				}
-				if((i+1)%10==0) {
-					pw.println("<br>");
-				}
-				if((i+1)%70==0) {
-					pw.println("<div><h5>Premium</h5></div>");
-				}
-				i++;
+				pw.println("<br><input type='submit' value='Book' style='padding: 12px 24px;margin: 4px 2px; background:#32a2a8; border:none; color:white; font-family:cursive;'>");
+				pw.println("</form>");
+				//pw.println("</div>");
+				pw.println("<script type='text/javascript'>checkBoxLimit()</script>");
+				pw.println("</body>");
+				pw.println("</html>");
 			}
-			pw.println("<br><input type='submit' style='box-shadow: rgba(255, 255, 255, 0.3) 0 0 2px inset, "
-					+ "rgba(0, 0, 0, 0.4) 0 1px 2px; text-decoration: none; transition-duration: .15s, .15s;' value='Book'>");
-			pw.println("</form>");
-			pw.println("</div>");
-			
+		}
+		else {
+			RequestDispatcher rd = req.getRequestDispatcher("error.html");
+			rd.include(req, res);
 		}
 	}
 }

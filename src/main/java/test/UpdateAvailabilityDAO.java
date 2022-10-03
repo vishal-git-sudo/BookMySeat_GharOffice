@@ -8,7 +8,7 @@ public class UpdateAvailabilityDAO {
 			String typeOfSeat = type.getTypeOfSeat().trim();
 			String title = type.getTitle().trim();
 			PreparedStatement ps = con.prepareStatement("UPDATE "+title+" SET Availability=? WHERE SeatType=?");
-			int k=0;
+			
 			if(typeOfSeat.equals("p")) {
 				ps.setString(1,"t");
 				ps.setString(2,typeOfSeat);
@@ -27,7 +27,6 @@ public class UpdateAvailabilityDAO {
 				ps.setString(2,"p");
 				k = k + ps.executeUpdate();
 			}
-			
 		}
 		catch(Exception e) {
 			e.printStackTrace();

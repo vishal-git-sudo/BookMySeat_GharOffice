@@ -2,12 +2,87 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>User Name</title>
+<style>
+body {
+		background:rgb(242, 242, 242);
+		background-repeat: no-repeat, repeat;
+		background-position: center; 
+		background-size: cover;
+		
+		color:#665E5E ;
+		font-family: cursive;
+		font-weight: bold;
+		font-size: 18px;
+		 margin: 0;
+		text-align:center;
+}
+.form {
+	text-align:center;
+}
+  input[type=submit]{
+  background-color: #32a2a8;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+input[type=text]{
+  border: 3px 3px;
+  font-size:20px;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.topnav a:hover {
+  background-color: #FB6464;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #F68888;
+  color: white;
+}
+.topnav-right {
+  float: right;
+}
+</style>
 </head>
 <body>
-	<form action="user" method="post">
-		Enter UserName: <input type="text" name="uname"><br>
+	<div class="topnav">
+  		<a class="active" href="home.html"><b>Book My Seat</b></a>
+  		<div class="topnav-right" onclick="goBack()">
+   			<a class='back'>Back</a>
+ 		</div>
+	</div>
+	<div class='form' >
+	<form action="user" method="post" >
+		Enter User Name: <input type="text" name="uname" required><br>
 		<input type="submit" value="Next">
 	</form>
+	</div>
+<script>
+  function goBack(){
+	 window.open(window.localStorage.back,"_self")
+ }
+</script>
 </body>
 </html>

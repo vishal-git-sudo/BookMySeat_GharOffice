@@ -11,19 +11,65 @@ public class BookingConfirmationServlet extends HttpServlet {
 		res.setContentType("text/html");
 		PrintWriter pw = res.getWriter();
 		ArrayList<Integer> ticketList = new ArrayList<Integer>();
-		String[] tickets = req.getParameterValues("seats");
+		String[] tickets = req.getParameterValues("seats[]");
 		for(int i=0;i<tickets.length;i++) {
 			ticketList.add(Integer.parseInt(tickets[i]));
 		}
-		System.out.println(tickets.toString());
-		String title = (String) req.getSession().getAttribute("title");
-		int[] k = new UpdateTicketDAO().update(ticketList,title.trim());
+		HttpSession hs = req.getSession(false);
+		String title = (String) hs.getAttribute("title");
+		String uname = (String) hs.getAttribute("uname");
+		int[] k = new UpdateTicketDAO().update(ticketList,title.trim(),uname);
+		pw.println("<head><style>body {"
+				+ "		background:rgb(242, 242, 242);"
+				+ "		background-repeat: no-repeat, repeat;"
+				+ "		background-position: center; "
+				+ "		background-size: cover;"
+				+ "		"
+				+ "		color:#665E5E ;"
+				+ "		font-family: cursive;"
+				+ "		font-weight: bold;"
+				+ "		font-size: 14px;"
+				+ "		 margin: 0;"
+				+ "		text-align:center;"
+				+ "} "
+				+ ".topnav {"
+				+ "  overflow: hidden;"
+				+ "  background-color: #333;"
+				+ "  "
+				+ "}"
+				+ ""
+				+ ".topnav a {"
+				+ "  float: left;"
+				+ "  color: #f2f2f2;"
+				+ "  text-align: center;"
+				+ "  padding: 14px 16px;"
+				+ "  text-decoration: none;"
+				+ "  font-size: 22px;"
+				+ "}"
+				+ ""
+				+ ".topnav a:hover {"
+				+ "  background-color: #FB6464;"
+				+ "  color: black;"
+				+ "}"
+				+ ""
+				+ ".topnav a.active {"
+				+ "  background-color: #F68888;"
+				+ "  color: white;"
+				+ "}"
+				+ ".topnav-right {"
+				+ "  float: right;"
+				+ "}</style></head>");
+		pw.println("<body><div class=\"topnav\">"
+				+ "  		<a class=\"active\" href=\"home.html\"><b>Book My Seat</b></a>"
+				+ "  		<div class=\"topnav-right\">"
+				+ "   			<a class='back' href='home.html'>Home</a>"
+				+ " 		</div>"
+				+ "	</div>");
+		pw.println("<div style='font-size:18px'>");
 		if(k!=null) {
-			pw.println("Booking Confirmed!<br>");
-			HttpSession hs = req.getSession(false);
-			String uname = (String) hs.getAttribute("uname");
-			pw.println("User: "+uname+"<br>");
-			pw.println("Movie: "+title+"<br>");
+			pw.println("<h3>Booking Confirmed!</h3>");
+			pw.println("User Name: "+uname.toUpperCase()+"<br>");
+			pw.println("Movie: "+updateTitle(title)+"<br>");
 			pw.println("Seats Booked: ");
 			for(int i=0;i<ticketList.size();i++) {
 				pw.println(ticketList.get(i)+" ");
@@ -38,5 +84,20 @@ public class BookingConfirmationServlet extends HttpServlet {
 			RequestDispatcher rd = req.getRequestDispatcher("home.html");
 			rd.include(req, res);
 		}
+		pw.println("</div>");
+		pw.println("</body>");
+	}
+	public String updateTitle(String title) {
+		char[] arr = title.toCharArray();
+		title="";
+		for(int i=0;i<arr.length;i++) {
+			if(Character.isLowerCase(arr[i])) {
+				title += Character.toUpperCase(arr[i]);
+			}
+			else if(Character.isUpperCase(arr[i])) {
+				title += " "+arr[i];
+			}
+		}
+		return title;
 	}
 }

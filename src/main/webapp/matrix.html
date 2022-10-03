@@ -2,9 +2,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Matrix</title>
+<style>
+body {
+		background:rgb(242, 242, 242);
+		background-repeat: no-repeat, repeat;
+		background-position: center; 
+		background-size: cover;
+		
+		color:#665E5E ;
+		font-family: cursive;
+		font-weight: bold;
+		font-size: 14px;
+		 margin: 0;
+		text-align:center;
+		
+	}
+input[type=submit]{
+  background-color: #32a2a8;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+  
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 22px;
+}
+
+.topnav a:hover {
+  background-color: #FB6464;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #F68888;
+  color: white;
+}
+.topnav-right {
+  float: right;
+}
+</style>
+<script>
+window.localStorage.back = window.location.href
+</script>
 </head>
 <body>
+	<div class="topnav">
+  		<a class="active" href="home.html"><b>Book My Seat</b></a>
+  		<div class="topnav-right">
+   			<a class='back' href='home.html'>Back</a>
+ 		</div>
+	</div>
+	<div>
 	<img src="images/Matrix.jpg" height="400" width="400">
 	<h3>Description:</h3>
 	<p>
@@ -12,9 +74,10 @@
 	the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.
 	</p>
 	<p><b>IMDB Rating:&nbsp;&nbsp;</b>8.7/10 </p>
-	<form action="home" method="post"><br>
-		<input type="hidden" name="title" value="Matrix"><br>
+	<form action="home" method="post">
+		<input type="hidden" name="title" value="Matrix">
 		<input type="submit" value="Continue to Book Tickets">
 	</form>
+	</div>
 </body>
 </html>
