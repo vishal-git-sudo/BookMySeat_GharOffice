@@ -15,7 +15,15 @@ public class BookingConfirmationServlet extends HttpServlet {
 		for(int i=0;i<tickets.length;i++) {
 			ticketList.add(Integer.parseInt(tickets[i]));
 		}
+		int finalCost = 0;
 		HttpSession hs = req.getSession(false);
+		String typeOfSeat = (String) hs.getAttribute("typeOfSeat");
+		if(typeOfSeat.equals("p")) {
+			finalCost = tickets.length * 250;
+		}
+		else {
+			finalCost = tickets.length * 150;
+		}
 		String title = (String) hs.getAttribute("title");
 		String uname = (String) hs.getAttribute("uname");
 		int[] k = new UpdateTicketDAO().update(ticketList,title.trim(),uname);
@@ -77,6 +85,7 @@ public class BookingConfirmationServlet extends HttpServlet {
 					pw.println(", ");
 				}
 			}
+			pw.println("<br>Billing Amount: "+finalCost);
 			hs.invalidate();
 		}
 		else {
