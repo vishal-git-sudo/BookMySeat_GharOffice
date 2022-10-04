@@ -34,23 +34,6 @@ public class SeatTypeServlet extends HttpServlet {
 				rd.include(req, res);
 			}
 			else {
-				/*pw.println("<!DOCTYPE html><html><head>function checkBoxLimit() {"+
-						"var checkBoxGroup = document.forms['form_name']['seats[]'];"+		
-						"var limit = 2;"+
-						"for (var i = 0; i < checkBoxGroup.length; i++) {"+
-							"checkBoxGroup[i].onclick = function() {"+
-								"var checkedcount = 0;"+
-								"for (var i = 0; i < checkBoxGroup.length; i++) {"+
-									"checkedcount += (checkBoxGroup[i].checked) ? 1 : 0;"+
-								"}"+
-								"if (checkedcount > limit) {"+
-									"console.log('You can select maximum of ' + limit + ' checkboxes.');"+
-									"alert('You can select maximum of ' + limit + ' checkboxes.');"+			
-									"this.checked = false;"+
-								"}"+
-							"}"+
-						"}"+
-					"}"+"*/
 				pw.println("<head><style>body {"
 						+ "		background:rgb(242, 242, 242);"
 						+ "		background-repeat: no-repeat, repeat;"
@@ -94,11 +77,11 @@ public class SeatTypeServlet extends HttpServlet {
 				pw.println("<body><div class=\"topnav\">"
 						+ "  		<a class=\"active\" href=\"home.html\"><b>Book My Seat</b></a>"
 						+ "  		<div class=\"topnav-right\">"
-						+ "   			<a class='back' href='home.html'>Back</a>"
+						+ "   			<a class='back' href='seatType.html'>Back</a>"
 						+ " 		</div>"
 						+ "	</div>");
 				pw.println("<h2 style='text-align:center'> Select The Seats </h2>");
-				//pw.println("<div style='text-align:center;border: 2px solid red;border-radius: 5px;box-shadow: 0 0 15px rgba(0,0,0,0.75);'>");
+				pw.println("<div style='text-align:center;border: 2px solid red;border-radius: 5px;box-shadow: 0 0 15px rgba(0,0,0,0.75);'>");
 				pw.println("<form action = 'BookingConfirmation' method='post' name='form_name' id='form_name'>");
 				int i=0;
 				pw.println("<div><h3>Standard</h3></div>");
@@ -126,8 +109,7 @@ public class SeatTypeServlet extends HttpServlet {
 				}
 				pw.println("<br><input type='submit' value='Book' style='padding: 12px 24px;margin: 4px 2px; background:#32a2a8; border:none; color:white; font-family:cursive;'>");
 				pw.println("</form>");
-				//pw.println("</div>");
-				pw.println("<script type='text/javascript'>checkBoxLimit()</script>");
+				pw.println("</div>");
 				pw.println("</body>");
 				pw.println("</html>");
 			}
